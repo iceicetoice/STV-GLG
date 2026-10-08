@@ -4,43 +4,7 @@ STV-GLGFormer is a Transformer framework for dynamically updated forecasts of ba
 
 ## Architecture
 
-```mermaid
-flowchart TB
-    A["Coverage history and cloud confidence"] --> AE["Area embedding and temporal self-attention"]
-    T["Calendar information"] --> TE["Calendar embedding and temporal self-attention"]
-    E["Regional environmental variables"] --> EE["Variable-region-time axial attention"]
-
-    AE -->|Query| CT["Area-time cross-attention"]
-    TE -->|Keys and values| CT
-    AE -->|Query| CE["Area-environment cross-attention"]
-    EE -->|Keys and values| CE
-
-    AE --> GT["Temporal compatibility gate"]
-    CT --> GT
-    AE --> GE["Environmental compatibility gate"]
-    CE --> GE
-    AE --> F["Three-route feature fusion"]
-    GT --> F
-    GE --> F
-
-    F --> G["Lifecycle pooling and global conditioning"]
-    D["Future calendar dates, seasonal positions, and lead times"] --> Q["Future-query self-attention"]
-    G --> L["Historically conditioned future features"]
-    Q --> L
-
-    L --> W["Positive increments and ordered lifecycle coordinates"]
-    G --> P["Shared amplitude, peak, shape parameters, and mixture weights"]
-    W --> GLG["Peak-normalized GLG basis fusion"]
-    P --> GLG
-    GLG --> Y["Daily coverage-area forecasts"]
-
-    classDef input fill:#edf5fb,stroke:#3f6b8a,color:#152b3a;
-    classDef encoder fill:#edf6f1,stroke:#39715a,color:#18372a;
-    classDef decoder fill:#fff5e8,stroke:#a46a25,color:#573913;
-    class A,T,E,D input;
-    class AE,TE,EE,CT,CE,GT,GE,F,G encoder;
-    class Q,L,W,P,GLG,Y decoder;
-```
+![STV-GLGFormer architecture](assets/stv_glgformer_architecture.png)
 
 ## Method
 
@@ -72,22 +36,27 @@ Adjacent observation prefixes are aligned over their common future dates. The fi
 $$
 \mathcal{L}_{\mathrm{prog}}=
 \left[\mathcal{L}_{\mathrm{cur}}-
-\operatorname{sg}(\mathcal{L}_{\mathrm{pre}})-\gamma\right]_+,
+\mathrm{sg}(\mathcal{L}_{\mathrm{pre}})-\gamma\right]_+,
 \qquad
 \mathcal{L}_{\mathrm{total}}=
 \mathcal{L}_{\mathrm{area}}+\lambda_{\mathrm{prog}}\mathcal{L}_{\mathrm{prog}}.
 $$
 
-Here, $[z]_+=\max(z,0)$ and $\operatorname{sg}$ denotes stop-gradient. Improvements and error increases within the tolerance remain unpenalized. The shorter-prefix branch is used during training; prediction requires a single forward pass.
+Here, $[z]_+=\max(z,0)$ and $\mathrm{sg}$ denotes stop-gradient. Improvements and error increases within the tolerance remain unpenalized. The shorter-prefix branch is used during training; prediction requires a single forward pass.
 
-## Data
+## Data Sources
 
-[Download data](data/STV_GLG.xlsx)
+| Source | Website |
+| --- | --- |
+| MODIS imagery | [NASA Ocean Color](https://oceancolor.gsfc.nasa.gov/) |
+| Ocean physics | [GLORYS12V1 - GLOBAL_MULTIYEAR_PHY_001_030](https://data.marine.copernicus.eu/product/GLOBAL_MULTIYEAR_PHY_001_030/description) |
+| Ocean biogeochemistry | [Global Ocean Biogeochemistry Hindcast - GLOBAL_MULTIYEAR_BGC_001_029](https://data.marine.copernicus.eu/product/GLOBAL_MULTIYEAR_BGC_001_029/description) |
+| Meteorological fields | [ERA5 hourly data on single levels](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview) |
 
 ## Installation
 
 ```bash
-python -m pip install -e .
+python -m pip install -r requirements.txt
 ```
 
 ## Training
