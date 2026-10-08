@@ -1,0 +1,53 @@
+{
+  "schema_version": "stv-glg-area-only-v1",
+  "source_file": "MODIS_2008_2025绿潮统计_最终修订.xlsx",
+  "source_sha256": "96ad6d99da7eaf71d51be31306d0aeb45ebfbd8b09d0d1f6df3e5d01bfa23dae",
+  "target_column": "解混面积（km²）",
+  "files": [
+    {
+      "file": "STV_GLG.xlsx",
+      "sha256": "4a4cd2b07667ed3d80bb5a5d9de50fb380fa9155021d2f472a8d7f4dca210f9b",
+      "bytes": 28950
+    }
+  ],
+  "years": [
+    {
+      "year": 2022,
+      "first_observation": "2022-05-30",
+      "last_observation": "2022-07-30",
+      "observed_days": 36,
+      "interpolated_days": 26,
+      "labeled_days": 62,
+      "candidate_days": 177,
+      "unlabeled_days": 115,
+      "environment_values_released": 0,
+      "cloud_values_released": 0
+    },
+    {
+      "year": 2023,
+      "first_observation": "2023-05-15",
+      "last_observation": "2023-08-15",
+      "observed_days": 63,
+      "interpolated_days": 30,
+      "labeled_days": 93,
+      "candidate_days": 177,
+      "unlabeled_days": 84,
+      "environment_values_released": 0,
+      "cloud_values_released": 0
+    },
+    {
+      "year": 2024,
+      "first_observation": "2024-05-15",
+      "last_observation": "2024-08-18",
+      "observed_days": 73,
+      "interpolated_days": 23,
+      "labeled_days": 96,
+      "candidate_days": 177,
+      "unlabeled_days": 81,
+      "environment_values_released": 0,
+      "cloud_values_released": 0
+    }
+  ],
+  "environment_values_released": 0,
+  "cloud_values_released": 0
+}

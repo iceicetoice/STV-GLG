@@ -1,0 +1,11 @@
+STV-GLGFormer
+Copyright 2026 the STV-GLGFormer contributors.
+
+The project code is licensed under the Apache License, Version 2.0.
+See LICENSE for the complete license text.
+
+The prepared data workbooks include author-supplied MODIS-derived coverage
+observations and environmental values derived from Copernicus Marine and ERA5
+products. These data are not automatically covered by the project code license.
+Source provenance and dataset limitations are retained in data/manifest.json,
+the workbooks, docs/DATASET.md, and DATA_NOTICE.md.
